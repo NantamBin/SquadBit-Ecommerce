@@ -1,19 +1,17 @@
 const express = require("express");
 const app = express();
-const PORT = 8080;
+const PORT = 8180;
+const corsMiddleware = require("./src/middleware/cors.js");
+const routes = require('./src/routes/web.js');
 
-// CORS Middleware
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-});
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+//Middleware
+app.use(corsMiddleware);
 
 //Rota
-app.get('/api/home', (req, res) => {
-    res.json({messagem: "Olá mundo"});
-});
+app.use(routes);
 
 app.listen(PORT, () => {
     console.log(`Servidor está rodando na ${PORT}`);
