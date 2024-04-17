@@ -1,5 +1,0 @@
-# Ignore .env files
-src/config/.env
-
-# Ignore SQL files
-ecommerce.sql
