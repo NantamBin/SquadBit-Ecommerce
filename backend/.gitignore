@@ -1,5 +1,8 @@
 # Ignore .env files
 src/config/.env
+.env
+
+node_modules
 
 # Ignore SQL files
 ecommerce.sql
