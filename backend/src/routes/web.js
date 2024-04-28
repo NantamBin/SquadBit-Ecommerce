@@ -4,6 +4,7 @@ const router = express.Router();
 //Controllers
 const productsController = require("../controllers/productsController.js");
 const homeController = require("../controllers/homeController.js");
+const usersController = require("../controllers/usersController.js");
 
 /* Route for HOME*/
 router.get("/", homeController.get);
@@ -16,5 +17,9 @@ router.delete("/meusProdutos/:id", productsController.remove);
 
 /* Route for Product serch */
 router.get("/meusProdutos/:name", productsController.getByName);
+
+// Route for Users
+router.post("/registro", usersController.create);
+router.post("/login", usersController.login);
 
 module.exports = router;
