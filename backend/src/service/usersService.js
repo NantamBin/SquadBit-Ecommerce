@@ -26,9 +26,10 @@ async function login({ email, senha }) {
 			[email, senha]
 		);
 
-		if (result.length > 0) {
-			return { message: "Usuário logado com sucesso" };
+		if (!result.length) {
+			throw new Error("Usuário ou senha inválidos");
 		}
+		return { message: "Usuário logado com sucesso" };
 	} catch (err) {
 		console.error("Erro ao fazer login", err);
 		throw err;
