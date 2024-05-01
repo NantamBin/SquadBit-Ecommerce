@@ -18,6 +18,26 @@ async function getByName(req, res, next) {
 	}
 }
 
+async function getCategories(req, res, next) {
+	try {
+		res.json(await produtoService.getProductsCategories());
+	} catch (err) {
+		console.error("Erro ao obter as categorias", err.message);
+		next(err);
+	}
+}
+
+async function getByCategory(req, res, next) {
+	try {
+		res.json(
+			await produtoService.getProductsByCategory(req.params.category_id)
+		);
+	} catch (err) {
+		console.error("Erro ao obter o produto", err.message);
+		next(err);
+	}
+}
+
 async function create(req, res, next) {
 	try {
 		res.json(await produtoService.create(req.body));
@@ -48,6 +68,8 @@ async function remove(req, res, next) {
 module.exports = {
 	get,
 	getByName,
+	getCategories,
+	getByCategory,
 	create,
 	update,
 	remove,

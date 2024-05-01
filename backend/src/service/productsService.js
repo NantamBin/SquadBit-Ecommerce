@@ -14,6 +14,20 @@ async function getProductsByName(name = "") {
 	return rows;
 }
 
+async function getProductsCategories() {
+	const rows = await db.query(`SELECT * from categorias`);
+
+	return rows;
+}
+
+async function getProductsByCategory(category_id) {
+	const rows = await db.query(`SELECT * from produtos where categoria_id=?`, [
+		category_id,
+	]);
+
+	return rows;
+}
+
 async function create(produto) {
 	const result = await db.query(
 		`INSERT INTO produtos 
@@ -78,6 +92,8 @@ async function remove(id) {
 module.exports = {
 	getProdutos,
 	getProductsByName,
+	getProductsCategories,
+	getProductsByCategory,
 	create,
 	update,
 	remove,

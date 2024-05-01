@@ -15,6 +15,13 @@ router.post("/meusProdutos", productsController.create);
 router.put("/meusProdutos/:id", productsController.update);
 router.delete("/meusProdutos/:id", productsController.remove);
 
+/* Route for Categories */
+router.get("/categorias", productsController.getCategories);
+router.get(
+	"/meusProdutos/categorias/:category_id",
+	productsController.getByCategory
+);
+
 /* Route for Product serch */
 router.get("/meusProdutos/:name", productsController.getByName);
 
