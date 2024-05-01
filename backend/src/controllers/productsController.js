@@ -2,7 +2,7 @@ const produtoService = require("../service/productsService.js");
 
 async function get(req, res, next) {
 	try {
-		res.json(await produtoService.getProdutos(req.query.page));
+		res.json(await produtoService.getProdutos(req.body));
 	} catch (err) {
 		console.error(`Erro ao obter os produtos`, err.message);
 		next(err);
