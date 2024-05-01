@@ -31,9 +31,9 @@ async function getProductsByCategory(category_id) {
 async function create(produto) {
 	const result = await db.query(
 		`INSERT INTO produtos 
-    (nome, descricao, preco, categoria_id, estoque, ativo) 
+    (nome, descricao, preco, categoria_id, estoque, ativo, imagemUrl) 
     VALUES 
-    (?, ?, ?, ?, ?)`,
+    (?, ?, ?, ?, ?, ?, ?)`,
 		[
 			produto.nome,
 			produto.descricao,
@@ -41,6 +41,7 @@ async function create(produto) {
 			produto.categoria_id,
 			produto.estoque,
 			produto.ativo,
+			produto.imagemUrl,
 		]
 	);
 
@@ -56,8 +57,8 @@ async function create(produto) {
 async function update(id, produto) {
 	const result = await db.query(
 		`UPDATE produtos 
-    SET nome=?, descricao=?, preco=?, categoria_id=?, estoque=?, ativo=?
-    WHERE id=?`,
+    SET nome=?, descricao=?, preco=?, categoria_id=?, estoque=?, ativo=?, imagemUrl=?
+    WHERE produto_id=?`,
 		[
 			produto.nome,
 			produto.descricao,
@@ -65,6 +66,8 @@ async function update(id, produto) {
 			produto.categoria_id,
 			produto.estoque,
 			produto.ativo,
+			produto.imagemUrl,
+			id,
 		]
 	);
 
@@ -78,7 +81,9 @@ async function update(id, produto) {
 }
 
 async function remove(id) {
-	const result = await db.query(`DELETE FROM produtos WHERE id=?`, [id]);
+	const result = await db.query(`DELETE FROM produtos WHERE produto_id=?`, [
+		id,
+	]);
 
 	let message = "Erro ao remover os produto";
 
