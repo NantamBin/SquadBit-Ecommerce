@@ -8,4 +8,5 @@ export interface IProduct {
 	unidade: number;
 	ativo?: number;
 	imagemUrl?: string;
+	quantity?: number;
 }
