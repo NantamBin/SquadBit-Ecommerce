@@ -17,12 +17,10 @@ export const Products = ({}: ProductsProps) => {
 	}, []);
 
 	return (
-		<div>
-			<ul className={styles.listproducts}>
-				{products.map((product) => (
-					<Product key={product.produto_id} product={product} />
-				))}
-			</ul>
+		<div className={styles.container}>
+			{products.map((product) => (
+				<Product key={product.produto_id} product={product} />
+			))}
 		</div>
 	);
 };

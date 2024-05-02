@@ -26,9 +26,9 @@ const heroSlides = [
 
 export default function Home() {
 	return (
-		<main className={styles.container}>
+		<>
 			<Hero slides={heroSlides} />
 			<Products />
-		</main>
+		</>
 	);
 }
