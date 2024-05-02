@@ -2,12 +2,12 @@
 
 import { fetchProductsByName } from "@/services/fetchProductsByName";
 import { IProduct } from "@/types/product.interface";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Product } from "@/components/Product/product";
 import "./page.css";
 
-const SearchPage = () => {
+function Search() {
 	const search = useSearchParams();
 	const searchQuery = search ? search.get("q") : null;
 	const [products, setProducts] = useState<IProduct[]>([]);
@@ -31,6 +31,14 @@ const SearchPage = () => {
 				<p>Nenhum produto foi encontrado</p>
 			)}
 		</div>
+	);
+}
+
+const SearchPage = () => {
+	return (
+		<Suspense>
+			<Search />
+		</Suspense>
 	);
 };
 
