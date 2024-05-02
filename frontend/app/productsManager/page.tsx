@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "./manageProducts.module.css";
 import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import { fetchCategories } from "@/services/fetchCategories";
+import { IProduct } from "@/types/product.interface";
 
 const units = [
 	{ id: 1, name: "Kg" },
@@ -14,7 +15,20 @@ const units = [
 
 const baseURL = "http://localhost:8180/meusProdutos/";
 
-const createProduct = async (product, fileName) => {
+const createProduct = async (
+	product: {
+		produto_id?: number;
+		nome: any;
+		descricao: any;
+		preco: any;
+		categoria_id: any;
+		estoque: any;
+		unidade: any;
+		ativo: any;
+		imagemUrl?: string;
+	},
+	fileName: string
+) => {
 	const productSubmit = {
 		nome: String(product.nome),
 		descricao: String(product.descricao),
@@ -43,7 +57,20 @@ const createProduct = async (product, fileName) => {
 		throw error;
 	}
 };
-const updateProduct = async (product, fileName) => {
+const updateProduct = async (
+	product: {
+		produto_id: any;
+		nome: any;
+		descricao: any;
+		preco: any;
+		categoria_id: any;
+		estoque: any;
+		unidade: any;
+		ativo: any;
+		imagemUrl?: string;
+	},
+	fileName: string
+) => {
 	const productSubmit = {
 		nome: String(product.nome),
 		descricao: String(product.descricao),
@@ -74,7 +101,7 @@ const updateProduct = async (product, fileName) => {
 	}
 };
 
-const deleteProduct = async (productId) => {
+const deleteProduct = async (productId: any) => {
 	try {
 		const response = await fetch(`${baseURL}${productId}`, {
 			method: "DELETE",
@@ -126,7 +153,7 @@ export default function ManageProducts() {
 			const data = await response.json();
 			setProducts(data);
 		} catch (error) {
-			toast.error("Erro ao carregar produtos: " + error.message);
+			toast.error("Erro ao carregar produtos: " + error);
 		}
 	};
 
@@ -139,9 +166,9 @@ export default function ManageProducts() {
 			"estoque",
 			"unidade",
 		];
-		const missingFields = [];
+		const missingFields: string[] = [];
 		fields.forEach((field) => {
-			if (!newProduct[field]) {
+			if (!newProduct[field as keyof typeof newProduct]) {
 				missingFields.push(field);
 			}
 		});
@@ -159,7 +186,7 @@ export default function ManageProducts() {
 		setNewProduct({ ...newProduct, [name]: newValue });
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 		const missingFields = validateForm();
 		if (missingFields.length > 0) {
@@ -169,15 +196,17 @@ export default function ManageProducts() {
 		}
 
 		try {
-			const data = new FormData();
-			data.set("file", file);
+			if (file) {
+				const data = new FormData();
+				data.set("file", file);
 
-			const res = await fetch("/api/upload", {
-				method: "POST",
-				body: data,
-			});
+				const res = await fetch("/api/upload", {
+					method: "POST",
+					body: data,
+				});
 
-			if (!res.ok) throw new Error(await res.text());
+				if (!res.ok) throw new Error(await res.text());
+			}
 		} catch (e: any) {
 			console.log(e);
 		}
@@ -192,7 +221,7 @@ export default function ManageProducts() {
 			}
 			fetchProducts(); // Função para recarregar produtos do servidor após a atualização
 		} catch (error) {
-			toast.error(`Erro ao salvar o produto: ${error.message}`);
+			toast.error(`Erro ao salvar o produto: ${error}`);
 		}
 		resetForm();
 	};
@@ -203,17 +232,43 @@ export default function ManageProducts() {
 			nome: "",
 			descricao: "",
 			preco: "",
-			categoria_id: null,
+			categoria_id: 0,
 			estoque: "",
 			unidade: "",
 			ativo: 1,
-			imagemUrl: null,
+			imagemUrl: "",
 		});
 		setIsEditing(false);
 	};
 
-	const editProduct = (product) => {
-		setNewProduct(product);
+	const editProduct = (
+		product:
+			| React.SetStateAction<{
+					produto_id: number;
+					nome: string;
+					descricao: string;
+					preco: string;
+					categoria_id: number;
+					estoque: string;
+					unidade: string;
+					ativo: number;
+					imagemUrl: string;
+			  }>
+			| IProduct
+	) => {
+		setNewProduct(
+			product as React.SetStateAction<{
+				produto_id: number;
+				nome: string;
+				descricao: string;
+				preco: string;
+				categoria_id: number;
+				estoque: string;
+				unidade: string;
+				ativo: number;
+				imagemUrl: string;
+			}>
+		);
 		setIsEditing(true);
 	};
 
@@ -357,12 +412,12 @@ export default function ManageProducts() {
 							<p>
 								Categoria:{" "}
 								{categories.find(
-									(c) => c.id.toString() === product.categoria_id.toString()
+									(c) => c.id === (product.categoria_id?.toString() || "")
 								)?.name || "Sem categoria"}
 							</p>
 							<p>
 								Estoque: {product.estoque}{" "}
-								{units.find((u) => u.name === product.unidade)?.name ||
+								{units.find((u) => u.name === String(product.unidade))?.name ||
 									"Sem unidade"}
 							</p>
 							<div className={styles.productActions}>
@@ -380,9 +435,7 @@ export default function ManageProducts() {
 											toast.success("Produto removido com sucesso!");
 											fetchProducts();
 										} catch (error) {
-											toast.error(
-												"Erro ao remover o produto: " + error.message
-											);
+											toast.error("Erro ao remover o produto: " + error);
 										}
 									}}
 									className={styles.removeButton}
