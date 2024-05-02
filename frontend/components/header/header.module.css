@@ -1,0 +1,142 @@
+.menu {
+	background-color: #333;
+	color: white;
+	padding: 12px 20px; /* Adicione um pouco mais de padding horizontal */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.toggle button {
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 24px;
+	cursor: pointer;
+	margin-right: 10px;
+	margin-left: -1em;
+}
+
+.toggle button:hover {
+	color: #f1f1f1;
+}
+.freeLink {
+	text-decoration: none;
+}
+
+.logo {
+	font-size: 24px;
+	cursor: pointer;
+	text-transform: uppercase;
+	margin: 0 20px;
+}
+
+.logo:hover {
+	color: #f1f1f1;
+}
+
+.buttonContainer {
+	display: flex;
+	align-items: center;
+	/* Não limite a largura máxima; permita que os botões definam seu próprio tamanho */
+	margin-left: auto; /* Isso fará com que a buttonContainer fique à direita */
+}
+
+.searchContainer form {
+	width: 24em;
+	display: flex;
+	justify-content: space-around;
+}
+
+.input {
+	padding: 10px;
+	margin-right: 15px;
+	border: none;
+	border-radius: 5px;
+	width: 100%;
+	color: #555;
+	box-sizing: border-box; /* Isso impede que o padding aumente a largura */
+	flex-grow: 1;
+	margin-right: 8px;
+}
+
+.button {
+	background-color: #555;
+	color: white;
+	border: none;
+	padding: 10px 15px; /* Ajuste o padding para os botões para que correspondam em tamanho */
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: 500;
+	transition: background-color 0.2s ease-in-out;
+	margin: 0 8px;
+	min-width: 100px; /* Largura mínima para uniformidade */
+	text-align: center; /* Alinhe o texto dos botões ao centro */
+}
+
+.button:hover {
+	background-color: #777;
+}
+
+.cart {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	font-size: 24px;
+	cursor: pointer;
+	margin-left: 15px; /* Espaçamento consistente com outros botões */
+}
+
+.cartNumber {
+	background-color: red;
+	color: white;
+	border-radius: 50%; /* Faz o número do carrinho ser perfeitamente redondo */
+	padding: 4px; /* Espaçamento adequado ao redor do número */
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	font-size: 0.8rem;
+	min-width: 16px; /* Assegura que seja um círculo mesmo com um dígito */
+	text-align: center;
+}
+
+.searchContainer {
+	display: flex; /* Usar flex para alinhar barra de pesquisa e botão */
+	flex-grow: 1; /* Faz com que a barra de pesquisa ocupe o espaço disponível */
+	margin: 0 20px; /* Adicione um espaçamento lateral para separar da logo e dos botões */
+	align-items: center;
+	justify-content: center;
+}
+
+.searchContainer button {
+	padding: 10px 15px;
+	white-space: nowrap;
+	background-color: #555;
+}
+
+@media (max-width: 768px) {
+	.menu {
+		width: 100%;
+		align-items: flex-start;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	.buttonContainer {
+		margin-top: 10px;
+	}
+	.searchContainer {
+		width: 100%;
+		margin: 0;
+	}
+	.logo {
+		margin: 0;
+	}
+	.cart {
+		z-index: 1;
+	}
+	.toggle button {
+		margin: 0;
+		padding: 5px 0;
+	}
+}
