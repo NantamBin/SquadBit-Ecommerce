@@ -27,9 +27,6 @@
 	margin: 10px;
 }
 
-/* .list {
-} */
-
 .flexContainer {
 	display: flex;
 	justify-content: space-between;
@@ -44,4 +41,10 @@
 
 .price {
 	font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+	.container {
+		width: 90%;
+	}
 }

@@ -15,21 +15,18 @@
 	z-index: 1;
 	border-radius: 5%;
 }
+.list {
+	list-style-type: none;
+}
+.list li {
+	margin-bottom: 10px;
+}
+.list li a {
+	text-decoration: none;
+}
 
 @media (max-width: 768px) {
 	.active {
 		width: 50%;
-	}
-
-	.list {
-		list-style-type: none;
-	}
-
-	.list li {
-		margin-bottom: 10px;
-	}
-
-	.list li a {
-		text-decoration: none;
 	}
 }
