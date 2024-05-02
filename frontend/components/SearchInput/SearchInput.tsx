@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import searchIcon from "../public/search.svg";
+import searchIcon from "@/public/search.svg";
 import Image from "next/image";
+import "./searchInput.css";
 
 interface Props {
 	classNameProps: string;
@@ -32,7 +33,13 @@ const SearchInput = ({ classNameProps }: Props) => {
 				pattern="[^'\x22]+" // Previne a entrada de aspas simples e duplas
 			/>
 			<button type="submit">
-				<Image src={searchIcon} alt="Cart" width={24} height={24} />
+				<Image
+					src={searchIcon}
+					alt="Cart"
+					width={24}
+					height={24}
+					className="searchIcon"
+				/>
 			</button>
 		</form>
 	);

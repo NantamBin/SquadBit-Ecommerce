@@ -1,0 +1,18 @@
+form {
+	display: flex;
+	justify-content: space-around;
+}
+
+button {
+	display: flex;
+	background-color: #10b981;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.searchIcon {
+	font-size: 1.5rem;
+}

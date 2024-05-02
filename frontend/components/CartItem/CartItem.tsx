@@ -29,7 +29,7 @@ function QuantitySelector({ product }: ProductProps) {
 	};
 
 	return (
-		<div className="">
+		<div>
 			<button
 				className={`${styles.button} ${styles.inherit} ${styles.red} ${styles.hover}`}
 				onClick={handleDecrement}
@@ -58,9 +58,7 @@ export default function CartItem({ product }: ProductProps) {
 	};
 
 	return (
-		<li
-			className={`${styles.listItem} ${styles.flex} ${styles.justifyBetween} ${styles.itemsCenter} ${styles.gap4} ${styles.mb2} ${styles.shadowMd} ${styles.padding4}`}
-		>
+		<li className={styles.listItem}>
 			<div className={styles.flex}>
 				<Image
 					src={product.imagemUrl || ""}

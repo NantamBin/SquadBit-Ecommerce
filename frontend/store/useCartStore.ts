@@ -1,5 +1,4 @@
 import { create } from "zustand";
-
 import { IProduct } from "@/types/product.interface";
 
 interface State {
