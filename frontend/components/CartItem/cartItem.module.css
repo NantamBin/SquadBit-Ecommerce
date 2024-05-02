@@ -1,0 +1,125 @@
+.input {
+}
+
+.width {
+	width: 40px;
+}
+
+.center {
+	text-align: center;
+}
+
+.rounded {
+	border-radius: 4px;
+}
+
+/* Button.module.css */
+.button {
+	padding: 8px; /* Ajuste conforme necessário */
+	transition: color 0.2s ease; /* Efeito de transição */
+}
+
+.inherit {
+	background-color: inherit;
+}
+
+.red {
+	color: #ef4444; /* Cor vermelha */
+}
+
+.hover {
+	/* Estilos para hover, como mudar a cor do texto */
+}
+
+/* Estilos para o hover do botão */
+.button:hover {
+	color: #dc2626; /* Cor vermelha mais escura no hover */
+}
+
+.buttonAdd {
+	background-color: inherit;
+	color: #10b981; /* Cor verde */
+	padding: 8px; /* Ajuste conforme necessário */
+	transition: transform 0.2s ease; /* Efeito de transição */
+}
+
+.buttonAdd:hover {
+	color: #059669; /* Cor verde mais escura no hover */
+	transform: scale(1.05); /* Efeito de escala no hover */
+}
+
+/* Button.module.css */
+.button {
+	padding: 4px 8px; /* Ajuste conforme necessário */
+	border: none; /* Remover a borda */
+	cursor: pointer; /* Cursor de ponteiro */
+	transition: color 0.2s ease; /* Efeito de transição */
+}
+
+.redText {
+	color: #ef4444; /* Cor vermelha */
+}
+
+.hoverText:hover {
+	color: #dc2626; /* Cor vermelha mais escura no hover */
+}
+
+.marginLeft {
+	margin-left: 0.5rem; /* Espaçamento à esquerda, ajuste conforme necessário */
+}
+
+.bgGray {
+	background-color: #f3f4f6; /* Cor de fundo cinza */
+}
+
+/* Container.module.css */
+.flexColumn {
+	display: flex;
+	flex-direction: column;
+}
+
+.marginLeft5 {
+	margin-left: 1.25rem; /* Ajuste conforme necessário */
+}
+
+.textCenter {
+	text-align: center;
+}
+
+.image {
+	width: 2.75rem; /* 11/4 = 2.75 */
+	height: 2.75rem; /* 11/4 = 2.75 */
+}
+
+/* List.module.css */
+.listItem {
+	margin-bottom: 0.5rem; /* Ajuste conforme necessário */
+}
+
+.flex {
+	display: flex;
+}
+
+.justifyBetween {
+	justify-content: space-between;
+}
+
+.itemsCenter {
+	align-items: center;
+}
+
+.gap4 {
+	gap: 1rem; /* Ajuste conforme necessário */
+}
+
+.mb2 {
+	margin-bottom: 0.5rem; /* Ajuste conforme necessário */
+}
+
+.shadowMd {
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adicione a sombra desejada */
+}
+
+.padding4 {
+	padding: 1rem; /* Ajuste conforme necessário */
+}

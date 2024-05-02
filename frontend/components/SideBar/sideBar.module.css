@@ -1,0 +1,35 @@
+.inactive {
+	display: none;
+}
+
+.active {
+	display: block;
+	display: flex;
+	flex-direction: column;
+	width: 20%;
+	height: auto;
+	background-color: #e6e4e4;
+	padding: 20px;
+	border-right: 1px solid #e0e0e0;
+	position: absolute;
+	z-index: 1;
+	border-radius: 5%;
+}
+
+@media (max-width: 768px) {
+	.active {
+		width: 50%;
+	}
+
+	.list {
+		list-style-type: none;
+	}
+
+	.list li {
+		margin-bottom: 10px;
+	}
+
+	.list li a {
+		text-decoration: none;
+	}
+}

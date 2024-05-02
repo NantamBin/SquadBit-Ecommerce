@@ -1,6 +1,6 @@
 "use client";
 
-import CartItem from "@/components/CartItem";
+import CartItem from "@/components/CartItem/CartItem";
 import { useCartStore } from "@/store/useCartStore";
 import styles from "./page.module.css";
 
@@ -10,8 +10,6 @@ export default function CartPage() {
 		(acc, product) => acc + +product.preco * (product.quantity as number),
 		0
 	);
-	console.log(total);
-	console.log(cart);
 	return (
 		<section className={styles.section}>
 			<div
