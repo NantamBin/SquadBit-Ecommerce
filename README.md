@@ -15,7 +15,7 @@ O projeto E-Commerce é uma plataforma completa para comprar e vender produtos o
 
 ## Instalação e Uso
 
-1. Clone o repositório: `git clone https://github.com/seu-usuario/nome-do-projeto.git`
+1. Clone o repositório: `git clone https://github.com/NantamBin/SquadBit-Ecommerce.git`
 2. Instale as dependências: `npm install`
 3. Configure as variáveis de ambiente conforme necessário.
 4. Inicie a api do express (backend): `npm run dev` 
