@@ -6,6 +6,7 @@ import styles from "./manageProducts.module.css";
 import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import { fetchCategories } from "@/services/fetchCategories";
 import { IProduct } from "@/types/product.interface";
+import getImagemFromPath from "@/utils/getImageFromPath";
 
 const units = [
 	{ id: 1, name: "Kg" },
@@ -119,6 +120,7 @@ export default function ManageProducts() {
 	const [products, setProducts] = useState<IProduct[]>([]);
 	const [fileName, setFileName] = React.useState("");
 	const [file, setFile] = React.useState<File>();
+	const [changeImage, setChangeImage] = useState(false);
 
 	const [newProduct, setNewProduct] = useState({
 		produto_id: 0,
@@ -212,14 +214,21 @@ export default function ManageProducts() {
 		}
 
 		try {
+			let updatedFileName = fileName;
+
 			if (isEditing) {
-				const updatedProduct = await updateProduct(newProduct, fileName);
+				if (!changeImage)
+					updatedFileName = getImagemFromPath(newProduct.imagemUrl) as string;
+				const updatedProduct = await updateProduct(newProduct, updatedFileName);
 				toast.success("Produto atualizado com sucesso!");
 			} else {
-				const newCreatedProduct = await createProduct(newProduct, fileName);
+				const newCreatedProduct = await createProduct(
+					newProduct,
+					updatedFileName
+				);
 				toast.success("Produto adicionado com sucesso!");
 			}
-			fetchProducts(); // Função para recarregar produtos do servidor após a atualização
+			fetchProducts();
 		} catch (error) {
 			toast.error(`Erro ao salvar o produto: ${error}`);
 		}
@@ -329,7 +338,7 @@ export default function ManageProducts() {
 						onChange={handleInputChange}
 						className={styles.select}
 					>
-						<option value="">Selecione uma Categoria</option>
+						<option value="">Selecione uma Categoria:</option>
 						{categories.map((category) => (
 							<option key={category.id} value={category.id}>
 								{category.name}
@@ -352,7 +361,7 @@ export default function ManageProducts() {
 							onChange={handleInputChange}
 							className={styles.unitSelect}
 						>
-							<option value="">Unidade ou Kg</option>
+							<option value="">Escolha a Unidade:</option>
 							{units.map((unit) => (
 								<option key={unit.id} value={unit.name}>
 									{unit.name}
@@ -360,18 +369,50 @@ export default function ManageProducts() {
 							))}
 						</select>
 					</div>
-					<input
-						type="file"
-						name="file"
-						onChange={(e) => {
-							const file = e.target.files?.[0];
-							if (file) {
-								setFile(file);
-								setFileName(file.name);
-							}
-						}}
-						className={styles.clear_right}
-					/>
+					{!isEditing && (
+						<input
+							type="file"
+							name="file"
+							onChange={(e) => {
+								const file = e.target.files?.[0];
+								if (file) {
+									setFile(file);
+									setFileName(file.name);
+								}
+							}}
+							className={styles.clear_right}
+						/>
+					)}
+					{isEditing && (
+						<div className={styles.editingFile}>
+							<p className={changeImage ? styles.disabled : ""}>
+								Arquivo padrão selecionado:
+								{" " + getImagemFromPath(newProduct.imagemUrl)}
+							</p>
+							<div className={styles.checkboxContainer}>
+								<label htmlFor="changeImageCheckbox">Deseja alterar?</label>
+								<input
+									type="checkbox"
+									id="changeImageCheckbox"
+									onChange={(e) => setChangeImage(e.target.checked)}
+								/>
+							</div>
+							{changeImage && (
+								<input
+									type="file"
+									name="file"
+									onChange={(e) => {
+										const file = e.target.files?.[0];
+										if (file) {
+											setFile(file);
+											setFileName(file.name);
+										}
+									}}
+									className={styles.clear_right}
+								/>
+							)}
+						</div>
+					)}
 
 					{isEditing ? (
 						<>

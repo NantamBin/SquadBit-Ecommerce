@@ -208,6 +208,35 @@
 	font-size: 1em;
 }
 
+.editingFile {
+	padding: 20px;
+	font-size: 0.9em;
+}
+
+.editingFile p,
+.editingFile label {
+	color: green;
+	margin-top: 3px;
+}
+
+.checkboxContainer {
+	color: black !important;
+	font-size: 0.9em;
+	padding: 0 5px;
+	display: flex;
+}
+
+.checkboxContainer label {
+	color: black !important;
+	font-size: 0.9em;
+	padding: 0 5px;
+}
+
+.disabled {
+	text-decoration: line-through;
+	color: red !important;
+}
+
 @media (max-width: 768px) {
 	.productList {
 		grid-template-columns: 1fr;
