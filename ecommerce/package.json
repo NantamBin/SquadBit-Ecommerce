@@ -1,0 +1,43 @@
+{
+	"name": "frontend",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "concurrently \"next dev\" \"nodemon api-backend/server.js\"",
+		"build": "next build",
+		"start": "concurrently \"next start\" \"node api-backend/server.js\"",
+		"lint": "next lint",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"@hookform/resolvers": "^3.3.4",
+		"concurrently": "^8.2.2",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.1",
+		"mysql2": "^3.9.3",
+		"next": "14.1.4",
+		"react": "^18",
+		"react-dom": "^18",
+		"react-hook-form": "^7.51.3",
+		"react-icons": "^5.1.0",
+		"react-slick": "^0.30.2",
+		"react-toastify": "^10.0.5",
+		"sharp": "^0.33.3",
+		"slick-carousel": "^1.8.1",
+		"zod": "^3.23.4",
+		"zustand": "^4.5.2"
+	},
+	"devDependencies": {
+		"@types/node": "^20",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"@types/react-slick": "^0.23.13",
+		"eslint": "^8",
+		"eslint-config-next": "14.1.4",
+		"eslint-plugin-next": "^0.0.0",
+		"eslint-plugin-react": "^7.34.1",
+		"nodemon": "^3.1.0",
+		"typescript": "^5"
+	}
+}

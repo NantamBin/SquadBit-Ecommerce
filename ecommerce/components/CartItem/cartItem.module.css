@@ -1,0 +1,91 @@
+.width {
+	width: 40px;
+}
+
+.center {
+	text-align: center;
+}
+
+.rounded {
+	border-radius: 4px;
+}
+
+.inherit {
+	background-color: inherit;
+}
+
+.red {
+	color: #ef4444;
+}
+.button:hover {
+	color: #dc2626; /* Cor vermelha mais escura no hover */
+}
+
+.buttonAdd {
+	background-color: inherit;
+	color: #10b981;
+	padding: 8px;
+	transition: transform 0.2s ease;
+	border: none;
+}
+
+.buttonAdd:hover {
+	color: #059669;
+	transform: scale(1.05);
+}
+
+.button {
+	padding: 4px 8px;
+	border: none;
+	cursor: pointer;
+	transition: color 0.2s ease;
+}
+
+.redText {
+	color: #ef4444;
+}
+
+.hoverText:hover {
+	color: #dc2626;
+}
+
+.marginLeft {
+	margin-left: 0.5rem;
+}
+
+.bgGray {
+	background-color: #f3f4f6;
+}
+
+.flexColumn {
+	display: flex;
+	flex-direction: column;
+}
+
+.marginLeft5 {
+	margin-left: 1.25rem;
+}
+
+.textCenter {
+	text-align: center;
+}
+
+.image {
+	width: 2.75rem;
+	height: 2.75rem;
+}
+
+.listItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 0.5rem;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	padding: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.flex {
+	display: flex;
+}
