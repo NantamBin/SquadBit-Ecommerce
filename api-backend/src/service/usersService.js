@@ -1,42 +1,33 @@
-const db = require("./dbService.js");
+const prisma = require('/media/john/HD/Linux/Trabalho/squad/SquadBit-Ecommerce/ecommerce/api-backend/src/config/prismaDatabase.js');
 
 async function create({ nome, email, senha }) {
-	try {
-		const result = await db.query(
-			`INSERT INTO usuarios 
-			(nome, email, senha) 
-			VALUES 
-			(?, ?, ?)`,
-			[nome, email, senha]
-		);
+  const newUser = await prisma.usuario.create({
+    data: {
+      nome,
+      email,
+      senha,
+    },
+  });
 
-		if (result.affectedRows) {
-			return { message: "Usuário criado com sucesso" };
-		}
-	} catch (err) {
-		console.error("Erro ao criar o usuário", err);
-		throw err;
-	}
+  return { message: "Usuário criado com sucesso", user: newUser };
 }
 
 async function login({ email, senha }) {
-	try {
-		const result = await db.query(
-			`SELECT * FROM usuarios WHERE email = ? AND senha = ?`,
-			[email, senha]
-		);
+  const user = await prisma.usuario.findFirst({
+    where: {
+      email,
+      senha,
+    },
+  });
 
-		if (!result.length) {
-			throw new Error("Usuário ou senha inválidos");
-		}
-		return { message: "Usuário logado com sucesso" };
-	} catch (err) {
-		console.error("Erro ao fazer login", err);
-		throw err;
-	}
+  if (!user) {
+    throw new Error("Usuário ou senha inválidos");
+  }
+
+  return { message: "Usuário logado com sucesso", user };
 }
 
 module.exports = {
-	create,
-	login,
+  create,
+  login,
 };

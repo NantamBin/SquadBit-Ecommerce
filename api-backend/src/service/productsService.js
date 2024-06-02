@@ -1,107 +1,82 @@
-const db = require("./dbService.js");
+const prisma = require('/media/john/HD/Linux/Trabalho/squad/SquadBit-Ecommerce/ecommerce/api-backend/src/config/prismaDatabase.js');
 
 async function getProdutos(page = 1) {
-	const rows = await db.query(`SELECT * from produtos`);
-
-	return rows;
+  const produtos = await prisma.produto.findMany();
+  return produtos;
 }
 
 async function getProductsByName(name = "") {
-	const rows = await db.query(
-		`SELECT * from produtos where nome LIKE('%${name}%')`
-	);
-
-	return rows;
+  const produtos = await prisma.produto.findMany({
+    where: {
+      nome: {
+        contains: name,
+      },
+    },
+  });
+  return produtos;
 }
 
 async function getProductsCategories() {
-	const rows = await db.query(`SELECT * from categorias`);
-
-	return rows;
+  const categorias = await prisma.categoria.findMany();
+  return categorias;
 }
 
-async function getProductsByCategory(category_id) {
-	const rows = await db.query(`SELECT * from produtos where categoria_id=?`, [
-		category_id,
-	]);
-
-	return rows;
+async function getProductsByCategory(categoriaId) {
+  const produtos = await prisma.produto.findMany({
+    where: { categoriaId: categoriaId },
+  });
+  return produtos;
 }
 
 async function create(produto) {
-	const result = await db.query(
-		`INSERT INTO produtos 
-    (nome, descricao, preco, categoria_id, estoque, ativo, unidade, imagemUrl) 
-    VALUES 
-    (?, ?, ?, ?, ?, ?, ?, ?)`,
-		[
-			produto.nome,
-			produto.descricao,
-			produto.preco,
-			produto.categoria_id,
-			produto.estoque,
-			produto.ativo,
-			produto.unidade,
-			produto.imagemUrl,
-		]
-	);
+  const newProduto = await prisma.produto.create({
+    data: {
+      nome: produto.nome,
+      descricao: produto.descricao,
+      preco: produto.preco,
+      categoriaId: produto.categoriaId,
+      estoque: produto.estoque,
+      ativo: produto.ativo,
+      unidade: produto.unidade,
+      imagemUrl: produto.imagemUrl,
+    },
+  });
 
-	let message = "Erro ao criar os produtos";
-
-	if (result.affectedRows) {
-		message = "Produto criado com sucesso";
-	}
-
-	return { message };
+  return { message: "Produto criado com sucesso", produto: newProduto };
 }
 
 async function update(id, produto) {
-	const result = await db.query(
-		`UPDATE produtos 
-    SET nome=?, descricao=?, preco=?, categoria_id=?, estoque=?, ativo=?, unidade=?, imagemUrl=?
-    WHERE produto_id=?`,
-		[
-			produto.nome,
-			produto.descricao,
-			produto.preco,
-			produto.categoria_id,
-			produto.estoque,
-			produto.ativo,
-			produto.unidade,
-			produto.imagemUrl,
-			id,
-		]
-	);
+  const updatedProduto = await prisma.produto.update({
+    where: { id: id },
+    data: {
+      nome: produto.nome,
+      descricao: produto.descricao,
+      preco: produto.preco,
+      categoriaId: produto.categoriaId,
+      estoque: produto.estoque,
+      ativo: produto.ativo,
+      unidade: produto.unidade,
+      imagemUrl: produto.imagemUrl,
+    },
+  });
 
-	let message = "Erro ao atualizar os produtos";
-
-	if (result.affectedRows) {
-		message = "Produto atualizado com sucesso";
-	}
-
-	return { message };
+  return { message: "Produto atualizado com sucesso", produto: updatedProduto };
 }
 
 async function remove(id) {
-	const result = await db.query(`DELETE FROM produtos WHERE produto_id=?`, [
-		id,
-	]);
+  await prisma.produto.delete({
+    where: { id: id },
+  });
 
-	let message = "Erro ao remover os produto";
-
-	if (result.affectedRows) {
-		message = "Produto removido com sucesso";
-	}
-
-	return { message };
+  return { message: "Produto removido com sucesso" };
 }
 
 module.exports = {
-	getProdutos,
-	getProductsByName,
-	getProductsCategories,
-	getProductsByCategory,
-	create,
-	update,
-	remove,
+  getProdutos,
+  getProductsByName,
+  getProductsCategories,
+  getProductsByCategory,
+  create,
+  update,
+  remove,
 };

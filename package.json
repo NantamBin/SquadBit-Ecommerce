@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.4",
+		"@prisma/client": "^5.14.0",
 		"concurrently": "^8.2.2",
 		"cors": "^2.8.5",
 		"dotenv": "^16.4.5",
@@ -38,6 +39,7 @@
 		"eslint-plugin-next": "^0.0.0",
 		"eslint-plugin-react": "^7.34.1",
 		"nodemon": "^3.1.0",
+		"prisma": "^5.14.0",
 		"typescript": "^5"
 	}
 }
