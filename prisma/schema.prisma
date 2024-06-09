@@ -25,24 +25,24 @@ enum Role {
 
 // Model de Categoria
 model Categoria {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  nome      String
-  produtos  Produto[]
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  nome     String
+  produtos Produto[]
 }
 
 // Model de Produto
 model Produto {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   nome        String
   descricao   String
   preco       Float
-  categoriaId String   @db.ObjectId
+  categoriaId String  @db.ObjectId
   estoque     Int
   ativo       Boolean
-  unidade     Unit     // Enum
+  unidade     Unit // Enum
   imagemUrl   String
 
-  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+  categoria Categoria @relation(fields: [categoriaId], references: [id])
 }
 
 // Model de Usuário
