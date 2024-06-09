@@ -7,7 +7,8 @@
 		"build": "next build",
 		"start": "concurrently \"next start\" \"node api-backend/server.js\"",
 		"lint": "next lint",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"postinstall": "prisma generate"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.4",
