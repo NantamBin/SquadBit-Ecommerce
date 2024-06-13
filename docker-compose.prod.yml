@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3000:3000"
+      - "8180:8180"
+    environment:
+      NODE_ENV: production
+    command: npm run start
